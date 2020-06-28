@@ -31,7 +31,7 @@ public class ForceskipCmd extends DJCommand
     {
         super(bot);
         this.name = "forceskip";
-        this.help = "Force le saut d'une chanson";
+        this.help = "Force le passage à la musique suivante";
         this.aliases = bot.getConfig().getAliases(this.name);
         this.bePlaying = true;
     }
@@ -41,7 +41,7 @@ public class ForceskipCmd extends DJCommand
     {
         AudioHandler handler = (AudioHandler)event.getGuild().getAudioManager().getSendingHandler();
         User u = event.getJDA().getUserById(handler.getRequester());
-        event.reply(event.getClient().getSuccess()+" Sauté **"+handler.getPlayer().getPlayingTrack().getInfo().title
+        event.reply(event.getClient().getSuccess()+" a été passée **"+handler.getPlayer().getPlayingTrack().getInfo().title
                 +"** (Demandée par "+(u==null ? "quelqu'un" : "**"+u.getName()+"**")+")");
         handler.getPlayer().stopTrack();
     }
