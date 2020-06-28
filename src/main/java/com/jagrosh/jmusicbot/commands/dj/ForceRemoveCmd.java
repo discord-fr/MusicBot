@@ -58,7 +58,7 @@ public class ForceRemoveCmd extends DJCommand
         AudioHandler handler = (AudioHandler) event.getGuild().getAudioManager().getSendingHandler();
         if (handler.getQueue().isEmpty())
         {
-            event.replyError("Il n'y a rien dans la queue !");
+            event.replyError("La queue est actuellement vide.");
             return;
         }
 
@@ -109,7 +109,7 @@ public class ForceRemoveCmd extends DJCommand
         int count = ((AudioHandler) event.getGuild().getAudioManager().getSendingHandler()).getQueue().removeAll(target.getIdLong());
         if (count == 0)
         {
-            event.replyWarning("**"+target.getName()+"** n'a défini aucunes musiques dans la queue !");
+            event.replyWarning("**"+target.getName()+"** n'a ajouté aucunes musique dans la queue !");
         }
         else
         {
