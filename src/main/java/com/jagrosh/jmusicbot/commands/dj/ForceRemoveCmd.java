@@ -113,7 +113,7 @@ public class ForceRemoveCmd extends DJCommand
         }
         else
         {
-            event.replySuccess("`"+count+"` entrées ont été enlevé de la queue de**"+target.getName()+"**#"+target.getDiscriminator()+".");
+            event.replySuccess("`"+count+"` entrées ont été retirées de la queue de**"+target.getName()+"**#"+target.getDiscriminator()+".");
         }
     }
 }
