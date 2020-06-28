@@ -55,15 +55,15 @@ public class JMusicBot
         Logger log = LoggerFactory.getLogger("Startup");
         
         // create prompt to handle startup
-        Prompt prompt = new Prompt("JMusicBot", "Switching to nogui mode. You can manually start in nogui mode by including the -Dnogui=true flag.", 
+        Prompt prompt = new Prompt("JMusicBot", "Passage en mode sans GUI. Pour lancer le mode sans GUI dès le lancement du bot utilisez le flag -Dnogui=true .", 
                 "true".equalsIgnoreCase(System.getProperty("nogui", "false")));
         
         // check deprecated nogui mode (new way of setting it is -Dnogui=true)
         for(String arg: args)
             if("-nogui".equalsIgnoreCase(arg))
             {
-                prompt.alert(Prompt.Level.WARNING, "GUI", "The -nogui flag has been deprecated. "
-                        + "Please use the -Dnogui=true flag before the name of the jar. Example: java -jar -Dnogui=true JMusicBot.jar");
+                prompt.alert(Prompt.Level.WARNING, "GUI", "Le flag -nogui est ancien. "
+                        + "Merci d'utiliser le flag -Dnogui=true avant le nom du jar. Example: java -jar -Dnogui=true JMusicBot.jar");
                 break;
             }
         
@@ -82,8 +82,8 @@ public class JMusicBot
         Bot bot = new Bot(waiter, config, settings);
         
         AboutCommand aboutCommand = new AboutCommand(Color.BLUE.brighter(),
-                                "a music bot that is [easy to host yourself!](https://github.com/jagrosh/MusicBot) (v"+version+")",
-                                new String[]{"High-quality music playback", "FairQueue™ Technology", "Easy to host yourself"},
+                                "un bot musique [facile à héberger vous même!](https://github.com/jagrosh/MusicBot) (v"+version+")",
+                                new String[]{"Musique de haute qualité", "Technologie FairQueue™", "Facile à héberger vous même"},
                                 RECOMMENDED_PERMS);
         aboutCommand.setIsAuthor(false);
         aboutCommand.setReplacementCharacter("\uD83C\uDFB6"); // 🎶
@@ -161,13 +161,13 @@ public class JMusicBot
             } 
             catch(Exception e) 
             {
-                log.error("Could not start GUI. If you are "
-                        + "running on a server or in a location where you cannot display a "
-                        + "window, please run in nogui mode using the -Dnogui=true flag.");
+                log.error("Impossible de lancer le GUI. Si vous hébergez "
+                        + "ce bot sur un serveur ou à un endroit où vous ne pouvez pas afficher une "
+                        + "fenêtre, merci d'utiliser le flag -Dnogui=true .");
             }
         }
         
-        log.info("Loaded config from " + config.getConfigLocation());
+        log.info("Config chargée à partir de: " + config.getConfigLocation());
         
         // attempt to log in and start
         try
@@ -175,7 +175,7 @@ public class JMusicBot
             JDA jda = new JDABuilder(AccountType.BOT)
                     .setToken(config.getToken())
                     .setAudioEnabled(true)
-                    .setGame(nogame ? null : Game.playing("loading..."))
+                    .setGame(nogame ? null : Game.playing("chargement..."))
                     .setStatus(config.getStatus()==OnlineStatus.INVISIBLE || config.getStatus()==OnlineStatus.OFFLINE 
                             ? OnlineStatus.INVISIBLE : OnlineStatus.DO_NOT_DISTURB)
                     .addEventListener(cb.build(), waiter, new Listener(bot))
@@ -185,15 +185,15 @@ public class JMusicBot
         }
         catch (LoginException ex)
         {
-            prompt.alert(Prompt.Level.ERROR, "JMusicBot", ex + "\nPlease make sure you are "
-                    + "editing the correct config.txt file, and that you have used the "
-                    + "correct token (not the 'secret'!)\nConfig Location: " + config.getConfigLocation());
+            prompt.alert(Prompt.Level.ERROR, "JMusicBot", ex + "\nMerci d'être sur que vous "
+                    + "éditez le fichier config.txt, et que vous avez utilisé un "
+                    + "token correct \nLocation de la config: " + config.getConfigLocation());
             System.exit(1);
         }
         catch(IllegalArgumentException ex)
         {
-            prompt.alert(Prompt.Level.ERROR, "JMusicBot", "Some aspect of the configuration is "
-                    + "invalid: " + ex + "\nConfig Location: " + config.getConfigLocation());
+            prompt.alert(Prompt.Level.ERROR, "JMusicBot", "Certains aspects de la configuration sont "
+                    + "invalides: " + ex + "\nLocation de la config: " + config.getConfigLocation());
             System.exit(1);
         }
     }

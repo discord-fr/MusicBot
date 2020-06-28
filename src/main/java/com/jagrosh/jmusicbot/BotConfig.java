@@ -105,13 +105,13 @@ public class BotConfig
             // validate bot token
             if(token==null || token.isEmpty() || token.equalsIgnoreCase("BOT_TOKEN_HERE"))
             {
-                token = prompt.prompt("Please provide a bot token."
-                        + "\nInstructions for obtaining a token can be found here:"
+                token = prompt.prompt("Merci de renseigner un token de bot."
+                        + "\nLes instructions pour récupérer un token peuvent être trouvées ici:"
                         + "\nhttps://github.com/jagrosh/MusicBot/wiki/Getting-a-Bot-Token."
-                        + "\nBot Token: ");
+                        + "\nToken de Bot: ");
                 if(token==null)
                 {
-                    prompt.alert(Prompt.Level.WARNING, CONTEXT, "No token provided! Exiting.\n\nConfig Location: " + path.toAbsolutePath().toString());
+                    prompt.alert(Prompt.Level.WARNING, CONTEXT, "Aucun token renseigné ! Arrêt.\n\nLocation de la config: " + path.toAbsolutePath().toString());
                     return;
                 }
                 else
@@ -125,11 +125,11 @@ public class BotConfig
             {
                 try
                 {
-                    owner = Long.parseLong(prompt.prompt("Owner ID was missing, or the provided owner ID is not valid."
-                        + "\nPlease provide the User ID of the bot's owner."
-                        + "\nInstructions for obtaining your User ID can be found here:"
+                    owner = Long.parseLong(prompt.prompt("L'ID du propriétaire n'a pas pu être trouvé ou est érroné"
+                        + "\nMerci de renseigner un ID valide pour le propriétaire du bot."
+                        + "\nLes instructions pour obtenir un ID sont trouvables ici:"
                         + "\nhttps://github.com/jagrosh/MusicBot/wiki/Finding-Your-User-ID"
-                        + "\nOwner User ID: "));
+                        + "\nID du propriétaire: "));
                 }
                 catch(NumberFormatException | NullPointerException ex)
                 {
@@ -137,7 +137,7 @@ public class BotConfig
                 }
                 if(owner<=0)
                 {
-                    prompt.alert(Prompt.Level.ERROR, CONTEXT, "Invalid User ID! Exiting.\n\nConfig Location: " + path.toAbsolutePath().toString());
+                    prompt.alert(Prompt.Level.ERROR, CONTEXT, "ID d'utilisateur incorrect ! Arrêt.\n\nLocation de la config: " + path.toAbsolutePath().toString());
                     System.exit(0);
                 }
                 else
@@ -167,8 +167,8 @@ public class BotConfig
                 }
                 catch(IOException ex) 
                 {
-                    prompt.alert(Prompt.Level.WARNING, CONTEXT, "Failed to write new config options to config.txt: "+ex
-                        + "\nPlease make sure that the files are not on your desktop or some other restricted area.\n\nConfig Location: " 
+                    prompt.alert(Prompt.Level.WARNING, CONTEXT, "Echec lors de l'écriture des nouvelles options dans le fichier config.txt: "+ex
+                        + "\nMerci de vérifier si le fichier n'est pas sur votre ordinateur ou dans d'autres zones réstreintes.\n\nLocation de la config: " 
                         + path.toAbsolutePath().toString());
                 }
             }
@@ -178,7 +178,7 @@ public class BotConfig
         }
         catch (ConfigException ex)
         {
-            prompt.alert(Prompt.Level.ERROR, CONTEXT, ex + ": " + ex.getMessage() + "\n\nConfig Location: " + path.toAbsolutePath().toString());
+            prompt.alert(Prompt.Level.ERROR, CONTEXT, ex + ": " + ex.getMessage() + "\n\nLocation de la config: " + path.toAbsolutePath().toString());
         }
     }
     
